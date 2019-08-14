@@ -1,4 +1,5 @@
 
+ 
 .blankdiv{background-color:#000;
 position:fixed;
 z-index: 9001;
@@ -7,19 +8,11 @@ left:0px;
 width:100%; opacity: 0.65;
 filter:alpha(opacity=65);}
 
-#popupform{height: 100%;
-    left: 0;
-    padding: 15px;
-    position: fixed;
-    top: 0;
-    width:97%;
-    z-index: 10001; 
+#popupform{padding: 15px; position: fixed; top: 0; z-index: 10001; left:30%;
 	}
 	
 #popupform .applyform{position:relative; overflow:auto;
-background-color:#fff;
-width:510px;
-height:500px;  margin:5% auto auto auto;
+background-color:#fff;  margin:5% auto auto auto;
 z-index: 9002; padding:10px; border:10px solid #7F3814; }
 
 

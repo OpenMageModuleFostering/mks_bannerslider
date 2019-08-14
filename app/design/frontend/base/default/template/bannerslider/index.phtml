@@ -2,41 +2,58 @@
 <?php $str = '?';
 $currentUrl = substr($currentUrl1,0,strrpos($currentUrl1,'?')); 
 ?>
+<?php $cssurl =  str_replace('index.php/','',$this->getUrl());?>
+
+
 <?php    $gallery_status=$this->getImagegalleryEnabled();   ?>
 <?php    $gallery_Paggingstar=$this->getImagegalleryPaggingstart();   ?>
 <?php    $gallery_Rowitem=$this->getImagegalleryRowitem(); ?>
+<?php    $gallery_imageheight = $this->getImagegalleryimageheight(); ?>
+<?php    $gallery_imagewidth = $this->getImagegalleryimagewidth(); ?>
+<?php    $gallery_popuphight = $this->getImagegalleryvideohight(); ?>
+<?php    $gallery_popupwidth = $this->getImagegalleryvideowidth(); ?>
+<?php    $gallery_popupspeed = $this->getImagegallerypopupspeed(); ?>
+<?php    $gallery_type = $this->getImagegallerytype(); ?>
+<?php    $sql = $this->getImagegallerysql(); ?>
+ 
  
 
 
-<?php if($gallery_status==1){ ?>
+<?php  if($gallery_status==1){
+/* check module status */
+ ?>
 
 
-<?php $cssurl =  str_replace('index.php/','',$this->getUrl());?>
+
+<?php
+ 
+ if($gallery_type=='1'){ ?>
 <script src="<?php echo $cssurl.'skin/frontend/base/default/bannerslider/js/jquery-1.2.6.noConflict.min.js'; ?>" type="text/javascript" ></script>
 <link rel="stylesheet" type="text/css" href="<?php echo $cssurl.'skin/frontend/base/default/bannerslider/css/imagegallery.css'; ?>" media="all">
 <script type="text/javascript">
-jQuery.noConflict();
+var imagesmks = jQuery.noConflict();
 function applyto(id) {
 var c= '#mks'+id
-jQuery(c).fadeIn(1000);
+imagesmks(c).fadeIn(1000);
 }
 
 function applytoprev(x,y) {
-jQuery('#mks'+x).hide();
-jQuery('#mks'+y).show();
+imagesmks('#mks'+x).hide();
+imagesmks('#mks'+y).show();
 }
 
 function applytonext(x,y) {
-jQuery('#mks'+x).hide();
-jQuery('#mks'+y).show();
+imagesmks('#mks'+x).hide();
+imagesmks('#mks'+y).show();
 }
 </script>
 
   
 <?php
 $connection = Mage::getSingleton('core/resource')->getConnection('core_write');
-$sql = $connection->query("select * from popupgalleryslider");
-$nr = $connection->fetchOne( 'SELECT COUNT(*) AS count FROM popupgalleryslider' );
+$prefix = Mage::getConfig()->getTablePrefix();
+$tblname=$prefix.'popupgalleryslider';
+$nr = $connection->fetchOne( "SELECT COUNT(*) AS count FROM $tblname" );
 //$sql = mysql_query("SELECT * FROM imagegallery");
 
 //echo $nr = mysql_num_rows($sql); // Get total of Num rows from the database query
@@ -85,7 +102,9 @@ $limit = 'LIMIT ' .($pn - 1) * $itemsPerPage .',' .$itemsPerPage;
 // Now we are going to run the same query as above but this time add $limit onto the end of the SQL syntax
 // $sql2 is what we will use to fuel our while loop statement below
 //$sql2 = mysql_query("SELECT * from imagegallery ORDER BY imagegallery_id ASC $limit");
-$sql2 = $connection->query("select * from popupgalleryslider ORDER BY id ASC $limit");
+$prefix = Mage::getConfig()->getTablePrefix();
+$tblname=$prefix.'popupgalleryslider';
+$sql2 = $connection->query("select * from $tblname ORDER BY id ASC $limit");
 
 $paginationDisplay = ""; // Initialize the pagination output variable
 // This code runs only if the last page variable is ot equal to 1, if it is only 1 page we require no paginated links to display
@@ -117,6 +136,7 @@ if ($lastPage != "1"){
 <table>
 <tr>
 <?php 
+
 $outputList = '';
 $vz=1;
 $i = 0;
@@ -131,13 +151,13 @@ $img_src = $media_url.$country;
 ?>
 <td>
 <div style="margin-left:64px;float:left;">
-<a href="javascript:void(0)"  onclick="applyto('<?php echo $vz; ?>')"><img src="<?php echo $img_src; ?>" height="100" width="100" style="padding:10px;"></a>
+<a href="javascript:void(0)"  onclick="applyto('<?php echo $vz; ?>')"><img src="<?php echo $img_src; ?>" height="<?php echo $gallery_imageheight; ?>" width="<?php echo $gallery_imagewidth; ?>" style="padding:10px;"></a>
 </div>
 
 
 
 <div id="mks<?php echo $vz; ?>" style="display:none">
-<div id="popupform">
+<div id="popupform" width="<?php echo $gallery_popupwidth; ?>" height="<?php echo $gallery_popuphight; ?>">
 <div class="blankdiv"></div>
 <div id="pclose" onclick="javascript:document.getElementById('<?php echo 'mks'.$vz; ?>').style.display='none'">
 <img src="<?php echo $cssurl.'skin/frontend/base/default/bannerslider/images/close.png'; ?>" />
@@ -147,7 +167,7 @@ $img_src = $media_url.$country;
 
 <center>
 <a href="javascript:void(0)"  onclick="applytoprev('<?php echo $vz; ?>' ,'<?php echo $vz-1; ?>')"><img src="<?php echo $cssurl.'skin/frontend/base/default/bannerslider/images/left_1.png'; ?>" /></a>
-<img src="<?php echo $img_src; ?>" height="400" width="400" >
+<img src="<?php echo $img_src; ?>" width="<?php echo $gallery_popupwidth-40; ?>" height="<?php echo $gallery_popuphight-40; ?>" >
 <a href="javascript:void(0)"  onclick="applytonext('<?php echo $vz; ?>' ,'<?php echo $vz+1; ?>')"><img src="<?php echo $cssurl.'skin/frontend/base/default/bannerslider/images/right_1.png'; ?>" /></a>
 </center>
 
@@ -166,14 +186,169 @@ echo '</tr><tr>';
 
 </tr>
 </table>
-      
+
+<?php }
+/* module type 1 close */
+
+?>   
+
+
+
+
+
+
+<?php
+ if($gallery_type==2) { ?>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo $cssurl.'skin/frontend/base/default/bannerslider/cssjs/jquery.jcarousel.min.js'; ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $cssurl.'skin/frontend/base/default/bannerslider/cssjs/skin.css'; ?>" />
+
+<script type="text/javascript">
+var videomks = jQuery.noConflict();
+videomks(document).ready(function() {
+videomks('.first-and-second-and-third-carousel').jcarousel();	 
+});
+
+function mks(obj)
+{ 
+var url = obj.src;
+document.getElementById('playerxxx').src=url;
+}
+
+function mksxx()
+{ 
+var obj = document.getElementById('mks1');
+var url = obj.src;
+document.getElementById('playerxxx').src=url;
+}
+
+window.onload=mksxx;
+</script> 
+
+
+
+<div id="wrap">
+
+<img class="mksiframe"  width="<?php echo $gallery_popupwidth; ?>" height="<?php echo $gallery_popuphight; ?>" id="playerxxx" src=""  /> 
+
+<ul id="first-carousel" class="first-and-second-and-third-carousel jcarousel-skin-ie7">
+<?php 
+$xx=1;
+while($row1 = $sql->fetch())
+{
+$id = $row1["id"];
+$firstname = $row1["url"];
+$country = $row1["image"];
+$media_url =  Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+$img_src = $media_url.$country; 
+?>
+<li>
+<img id="mks<?php echo $xx; ?>" src="<?php echo $img_src; ?>" height="<?php echo $gallery_imageheight; ?>" width="<?php echo $gallery_imagewidth; ?>" style="padding:10px;" onclick="mks(this);">
+</li>
+<?php $xx++; } ?>
+  
+</ul>
+</div>
+
+
+
+
+
+<?php /* close type 2 */  } ?>
+
+   
+
+
+
+<?php
+if($gallery_type==3) { ?>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo $cssurl.'skin/frontend/base/default/bannerslider/cssjs/jquery.jcarousel.min.js'; ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $cssurl.'skin/frontend/base/default/bannerslider/cssjs/skin.css'; ?>" />
+
+<script type="text/javascript">
+var videomks = jQuery.noConflict();
+videomks(document).ready(function() {
+videomks('.first-and-second-and-third-carousel').jcarousel();	 
+});
+</script> 
+
+<script src="<?php echo $cssurl.'skin/frontend/base/default/bannerslider/js/jquery-1.2.6.noConflict.min.js'; ?>" type="text/javascript" ></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $cssurl.'skin/frontend/base/default/bannerslider/css/imagegallery.css'; ?>" media="all">
+<script type="text/javascript">
+ 
+function applyto1(id) {
+var c= '#mks'+id;
+videomks(c).fadeIn(1000);
+}
+
+function applytoprev(x,y) {
+videomks('#mks'+x).hide();
+videomks('#mks'+y).show();
+}
+
+function applytonext(x,y) {
+videomks('#mks'+x).hide();
+videomks('#mks'+y).show();
+}
+</script>
+
+<div id="wrap">
+
+  
+
+<ul id="first-carousel" class="first-and-second-and-third-carousel jcarousel-skin-ie7">
+<?php 
+$xx=1;
+$vz=1;
+while($row1 = $sql->fetch())
+{
+$id = $row1["id"];
+$firstname = $row1["url"];
+$country = $row1["image"];
+$media_url =  Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+$img_src = $media_url.$country; 
+?>
+<li>
+<img   src="<?php echo $img_src; ?>" height="<?php echo $gallery_imageheight; ?>" width="<?php echo $gallery_imagewidth; ?>" style="padding:10px;" href="javascript:void(0)"  onclick="applyto1('<?php echo $vz; ?>')">
+</li>
+
+<div id="mks<?php echo $vz; ?>" style="display:none" >
+<div id="popupform" width="<?php echo $gallery_popupwidth; ?>" height="<?php echo $gallery_popuphight; ?>">
+<div class="blankdiv"></div>
+<div id="pclose" onclick="javascript:document.getElementById('<?php echo 'mks'.$vz; ?>').style.display='none'">
+<img src="<?php echo $cssurl.'skin/frontend/base/default/bannerslider/images/close.png'; ?>" />
+</div>
+<div class="applyform">
+<p id="contactArea">
+
+<center>
+<a href="javascript:void(0)"  onclick="applytoprev('<?php echo $vz; ?>' ,'<?php echo $vz-1; ?>')"><img src="<?php echo $cssurl.'skin/frontend/base/default/bannerslider/images/left_1.png'; ?>" /></a>
+<img src="<?php echo $img_src; ?>" width="<?php echo $gallery_popupwidth-40; ?>" height="<?php echo $gallery_popuphight-40; ?>" >
+<a href="javascript:void(0)"  onclick="applytonext('<?php echo $vz; ?>' ,'<?php echo $vz+1; ?>')"><img src="<?php echo $cssurl.'skin/frontend/base/default/bannerslider/images/right_1.png'; ?>" /></a>
+</center>
+
+</p>
+</div>
+</div>
+</div>
+<?php $xx++; $vz++; } ?>
+  
+</ul>
+</div>
+
+
+
+
+
+<?php /* close type 3 */  } ?>
 
 
 
 
 <?php } else { ?>
 
-<h1 style="color:red;">Enable ( MKS IMAGE GALLERY (POP UP) ) Module via Admin = System -> Configuration-> General Setting </h1>
+<span style="color:red;">Enable ( MKS IMAGE GALLERY ) Module via Admin : = </span> <span style="color:black;">System -> Configuration->Mks Image gallery-> General Setting </span>
 
 <?php } ?>
 
