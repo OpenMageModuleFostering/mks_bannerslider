@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/Mks_Bannerslider",
+    "type": "magento-module",
+    "license": "OSL",
+    "homepage": "",
+    "description": "This Magento image gallery extension free is compatible with all Magento stores. You can easily manage photo gallery on your site using this image gallery module.",
+    "authors": [
+    {
+        "name": "mukesh kumar saini",
+        "email": "in.mukeshsaini@gmail.com"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

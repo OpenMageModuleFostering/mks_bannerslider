@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <bannerslider_adminhtml_bannersliderbackend_index>
+	<reference name="content">
+	  <block type="bannerslider/adminhtml_bannersliderbackend" name="bannersliderbackend" template="bannerslider/bannersliderbackend.phtml"/>
+	</reference>
+  </bannerslider_adminhtml_bannersliderbackend_index>
+  <bannerslider_adminhtml_popupgalleryslider_index>
+	<reference name="content">
+	  <block type="bannerslider/adminhtml_popupgalleryslider" name="popupgalleryslider" />
+	</reference>
+  </bannerslider_adminhtml_popupgalleryslider_index>
+</layout>
