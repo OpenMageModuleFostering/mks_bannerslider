@@ -40,7 +40,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-							<comment>5,10,15,20,25,30.....Default (15)</comment>
+							<comment>5,10,15,20,25,30.....Default (12)</comment>
                           </paggingstart>
                           <rowitem translate="label">
                             <label>Number Of Row item</label>
@@ -49,7 +49,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-							<comment>3,4,5,6,7.......Default (5)</comment>
+							<comment>3,4,5,6,7.......Default (4)</comment>
                           </rowitem>
 					   </fields>
 					   </imagegallerygroup>
