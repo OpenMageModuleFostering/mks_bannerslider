@@ -1,5 +1,5 @@
 <?php
-class Mks_Bannerslider_Block_Adminhtml_Popupgalleryslider_Edit_Tab_Form extends Mage_Adminhtml_Block_Widget_Form
+class Mks_Bannerslider_Block_Adminhtml_Imagegallery_Edit_Tab_Form extends Mage_Adminhtml_Block_Widget_Form
 {
 		protected function _prepareForm()
 		{
@@ -23,12 +23,7 @@ class Mks_Bannerslider_Block_Adminhtml_Popupgalleryslider_Edit_Tab_Form extends 
 						"label" => Mage::helper("bannerslider")->__("URL"),
 						"name" => "url",
 						));
-									
-						 $fieldset->addField('category', 'select', array(
-						'label'     => Mage::helper('bannerslider')->__('Category Id'),
-						'values'   => Mks_Bannerslider_Block_Adminhtml_Popupgalleryslider_Grid::getValueArray3(),
-						'name' => 'category',
-						));
+					
 						$fieldset->addField("description", "textarea", array(
 						"label" => Mage::helper("bannerslider")->__("Description"),
 						"name" => "description",
@@ -36,17 +31,17 @@ class Mks_Bannerslider_Block_Adminhtml_Popupgalleryslider_Edit_Tab_Form extends 
 									
 						 $fieldset->addField('status', 'select', array(
 						'label'     => Mage::helper('bannerslider')->__('Status'),
-						'values'   => Mks_Bannerslider_Block_Adminhtml_Popupgalleryslider_Grid::getValueArray5(),
+						'values'   => Mks_Bannerslider_Block_Adminhtml_Imagegallery_Grid::getValueArray4(),
 						'name' => 'status',
 						));
 
-				if (Mage::getSingleton("adminhtml/session")->getPopupgallerysliderData())
+				if (Mage::getSingleton("adminhtml/session")->getImagegalleryData())
 				{
-					$form->setValues(Mage::getSingleton("adminhtml/session")->getPopupgallerysliderData());
-					Mage::getSingleton("adminhtml/session")->setPopupgallerysliderData(null);
+					$form->setValues(Mage::getSingleton("adminhtml/session")->getImagegalleryData());
+					Mage::getSingleton("adminhtml/session")->setImagegalleryData(null);
 				} 
-				elseif(Mage::registry("popupgalleryslider_data")) {
-				    $form->setValues(Mage::registry("popupgalleryslider_data")->getData());
+				elseif(Mage::registry("imagegallery_data")) {
+				    $form->setValues(Mage::registry("imagegallery_data")->getData());
 				}
 				return parent::_prepareForm();
 		}

@@ -1,16 +1,16 @@
 <?php
 
-class Mks_Bannerslider_Adminhtml_PopupgallerysliderController extends Mage_Adminhtml_Controller_Action
+class Mks_Bannerslider_Adminhtml_ImagegalleryController extends Mage_Adminhtml_Controller_Action
 {
 		protected function _initAction()
 		{
-				$this->loadLayout()->_setActiveMenu("bannerslider/popupgalleryslider")->_addBreadcrumb(Mage::helper("adminhtml")->__("Popupgalleryslider  Manager"),Mage::helper("adminhtml")->__("Popupgalleryslider Manager"));
+				$this->loadLayout()->_setActiveMenu("bannerslider/imagegallery")->_addBreadcrumb(Mage::helper("adminhtml")->__("Imagegallery  Manager"),Mage::helper("adminhtml")->__("Imagegallery Manager"));
 				return $this;
 		}
 		public function indexAction() 
 		{
 			    $this->_title($this->__("Bannerslider"));
-			    $this->_title($this->__("Manager Popupgalleryslider"));
+			    $this->_title($this->__("Manager Imagegallery"));
 
 				$this->_initAction();
 				$this->renderLayout();
@@ -18,19 +18,19 @@ class Mks_Bannerslider_Adminhtml_PopupgallerysliderController extends Mage_Admin
 		public function editAction()
 		{			    
 			    $this->_title($this->__("Bannerslider"));
-				$this->_title($this->__("Popupgalleryslider"));
+				$this->_title($this->__("Imagegallery"));
 			    $this->_title($this->__("Edit Item"));
 				
 				$id = $this->getRequest()->getParam("id");
-				$model = Mage::getModel("bannerslider/popupgalleryslider")->load($id);
+				$model = Mage::getModel("bannerslider/imagegallery")->load($id);
 				if ($model->getId()) {
-					Mage::register("popupgalleryslider_data", $model);
+					Mage::register("imagegallery_data", $model);
 					$this->loadLayout();
-					$this->_setActiveMenu("bannerslider/popupgalleryslider");
-					$this->_addBreadcrumb(Mage::helper("adminhtml")->__("Popupgalleryslider Manager"), Mage::helper("adminhtml")->__("Popupgalleryslider Manager"));
-					$this->_addBreadcrumb(Mage::helper("adminhtml")->__("Popupgalleryslider Description"), Mage::helper("adminhtml")->__("Popupgalleryslider Description"));
+					$this->_setActiveMenu("bannerslider/imagegallery");
+					$this->_addBreadcrumb(Mage::helper("adminhtml")->__("Imagegallery Manager"), Mage::helper("adminhtml")->__("Imagegallery Manager"));
+					$this->_addBreadcrumb(Mage::helper("adminhtml")->__("Imagegallery Description"), Mage::helper("adminhtml")->__("Imagegallery Description"));
 					$this->getLayout()->getBlock("head")->setCanLoadExtJs(true);
-					$this->_addContent($this->getLayout()->createBlock("bannerslider/adminhtml_popupgalleryslider_edit"))->_addLeft($this->getLayout()->createBlock("bannerslider/adminhtml_popupgalleryslider_edit_tabs"));
+					$this->_addContent($this->getLayout()->createBlock("bannerslider/adminhtml_imagegallery_edit"))->_addLeft($this->getLayout()->createBlock("bannerslider/adminhtml_imagegallery_edit_tabs"));
 					$this->renderLayout();
 				} 
 				else {
@@ -43,29 +43,29 @@ class Mks_Bannerslider_Adminhtml_PopupgallerysliderController extends Mage_Admin
 		{
 
 		$this->_title($this->__("Bannerslider"));
-		$this->_title($this->__("Popupgalleryslider"));
+		$this->_title($this->__("Imagegallery"));
 		$this->_title($this->__("New Item"));
 
         $id   = $this->getRequest()->getParam("id");
-		$model  = Mage::getModel("bannerslider/popupgalleryslider")->load($id);
+		$model  = Mage::getModel("bannerslider/imagegallery")->load($id);
 
 		$data = Mage::getSingleton("adminhtml/session")->getFormData(true);
 		if (!empty($data)) {
 			$model->setData($data);
 		}
 
-		Mage::register("popupgalleryslider_data", $model);
+		Mage::register("imagegallery_data", $model);
 
 		$this->loadLayout();
-		$this->_setActiveMenu("bannerslider/popupgalleryslider");
+		$this->_setActiveMenu("bannerslider/imagegallery");
 
 		$this->getLayout()->getBlock("head")->setCanLoadExtJs(true);
 
-		$this->_addBreadcrumb(Mage::helper("adminhtml")->__("Popupgalleryslider Manager"), Mage::helper("adminhtml")->__("Popupgalleryslider Manager"));
-		$this->_addBreadcrumb(Mage::helper("adminhtml")->__("Popupgalleryslider Description"), Mage::helper("adminhtml")->__("Popupgalleryslider Description"));
+		$this->_addBreadcrumb(Mage::helper("adminhtml")->__("Imagegallery Manager"), Mage::helper("adminhtml")->__("Imagegallery Manager"));
+		$this->_addBreadcrumb(Mage::helper("adminhtml")->__("Imagegallery Description"), Mage::helper("adminhtml")->__("Imagegallery Description"));
 
 
-		$this->_addContent($this->getLayout()->createBlock("bannerslider/adminhtml_popupgalleryslider_edit"))->_addLeft($this->getLayout()->createBlock("bannerslider/adminhtml_popupgalleryslider_edit_tabs"));
+		$this->_addContent($this->getLayout()->createBlock("bannerslider/adminhtml_imagegallery_edit"))->_addLeft($this->getLayout()->createBlock("bannerslider/adminhtml_imagegallery_edit_tabs"));
 
 		$this->renderLayout();
 
@@ -98,13 +98,13 @@ else {
 		if ($_FILES['image']['name']) {
 
 			if($this->getRequest()->getParam("id")){
-				$model = Mage::getModel("bannerslider/popupgalleryslider")->load($this->getRequest()->getParam("id"));
+				$model = Mage::getModel("bannerslider/imagegallery")->load($this->getRequest()->getParam("id"));
 				if($model->getData('image')){
 						$io = new Varien_Io_File();
 						$io->rm(Mage::getBaseDir('media').DS.implode(DS,explode('/',$model->getData('image'))));	
 				}
 			}
-						$path = Mage::getBaseDir('media') . DS . 'bannerslider' . DS .'popupgalleryslider'.DS;
+						$path = Mage::getBaseDir('media') . DS . 'bannerslider' . DS .'imagegallery'.DS;
 						$uploader = new Varien_File_Uploader('image');
 						$uploader->setAllowedExtensions(array('jpg','png','gif'));
 						$uploader->setAllowRenameFiles(false);
@@ -113,7 +113,7 @@ else {
 						$filename = $uploader->getNewFileName($destFile);
 						$uploader->save($path, $filename);
 
-						$post_data['image']='bannerslider/popupgalleryslider/'.$filename;
+						$post_data['image']='bannerslider/imagegallery/'.$filename;
 		}
     }
 }
@@ -126,13 +126,13 @@ else {
 //save image
 
 
-						$model = Mage::getModel("bannerslider/popupgalleryslider")
+						$model = Mage::getModel("bannerslider/imagegallery")
 						->addData($post_data)
 						->setId($this->getRequest()->getParam("id"))
 						->save();
 
-						Mage::getSingleton("adminhtml/session")->addSuccess(Mage::helper("adminhtml")->__("Popupgalleryslider was successfully saved"));
-						Mage::getSingleton("adminhtml/session")->setPopupgallerysliderData(false);
+						Mage::getSingleton("adminhtml/session")->addSuccess(Mage::helper("adminhtml")->__("Imagegallery was successfully saved"));
+						Mage::getSingleton("adminhtml/session")->setImagegalleryData(false);
 
 						if ($this->getRequest()->getParam("back")) {
 							$this->_redirect("*/*/edit", array("id" => $model->getId()));
@@ -143,7 +143,7 @@ else {
 					} 
 					catch (Exception $e) {
 						Mage::getSingleton("adminhtml/session")->addError($e->getMessage());
-						Mage::getSingleton("adminhtml/session")->setPopupgallerysliderData($this->getRequest()->getPost());
+						Mage::getSingleton("adminhtml/session")->setImagegalleryData($this->getRequest()->getPost());
 						$this->_redirect("*/*/edit", array("id" => $this->getRequest()->getParam("id")));
 					return;
 					}
@@ -158,7 +158,7 @@ else {
 		{
 				if( $this->getRequest()->getParam("id") > 0 ) {
 					try {
-						$model = Mage::getModel("bannerslider/popupgalleryslider");
+						$model = Mage::getModel("bannerslider/imagegallery");
 						$model->setId($this->getRequest()->getParam("id"))->delete();
 						Mage::getSingleton("adminhtml/session")->addSuccess(Mage::helper("adminhtml")->__("Item was successfully deleted"));
 						$this->_redirect("*/*/");
@@ -177,7 +177,7 @@ else {
 			try {
 				$ids = $this->getRequest()->getPost('ids', array());
 				foreach ($ids as $id) {
-                      $model = Mage::getModel("bannerslider/popupgalleryslider");
+                      $model = Mage::getModel("bannerslider/imagegallery");
 					  $model->setId($id)->delete();
 				}
 				Mage::getSingleton("adminhtml/session")->addSuccess(Mage::helper("adminhtml")->__("Item(s) was successfully removed"));
@@ -193,8 +193,8 @@ else {
 		 */
 		public function exportCsvAction()
 		{
-			$fileName   = 'popupgalleryslider.csv';
-			$grid       = $this->getLayout()->createBlock('bannerslider/adminhtml_popupgalleryslider_grid');
+			$fileName   = 'imagegallery.csv';
+			$grid       = $this->getLayout()->createBlock('bannerslider/adminhtml_imagegallery_grid');
 			$this->_prepareDownloadResponse($fileName, $grid->getCsvFile());
 		} 
 		/**
@@ -202,8 +202,8 @@ else {
 		 */
 		public function exportExcelAction()
 		{
-			$fileName   = 'popupgalleryslider.xml';
-			$grid       = $this->getLayout()->createBlock('bannerslider/adminhtml_popupgalleryslider_grid');
+			$fileName   = 'imagegallery.xml';
+			$grid       = $this->getLayout()->createBlock('bannerslider/adminhtml_imagegallery_grid');
 			$this->_prepareDownloadResponse($fileName, $grid->getExcelFile($fileName));
 		}
 }

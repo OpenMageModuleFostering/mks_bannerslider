@@ -3,10 +3,10 @@
     "type": "magento-module",
     "license": "OSL",
     "homepage": "",
-    "description": "This Magento image gallery extension free is compatible with all Magento stores. You can easily manage photo gallery on your site using this image gallery module.",
+    "description": "Banner Slider Fully Dynamic (Pop-up image gallery on cms page). always use Banner Slider",
     "authors": [
     {
-        "name": "mukesh kumar saini",
+        "name": "Mukesh Kumar saini",
         "email": "in.mukeshsaini@gmail.com"
     }
 ],

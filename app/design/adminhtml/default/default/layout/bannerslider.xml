@@ -5,9 +5,9 @@
 	  <block type="bannerslider/adminhtml_bannersliderbackend" name="bannersliderbackend" template="bannerslider/bannersliderbackend.phtml"/>
 	</reference>
   </bannerslider_adminhtml_bannersliderbackend_index>
-  <bannerslider_adminhtml_popupgalleryslider_index>
+  <bannerslider_adminhtml_imagegallery_index>
 	<reference name="content">
-	  <block type="bannerslider/adminhtml_popupgalleryslider" name="popupgalleryslider" />
+	  <block type="bannerslider/adminhtml_imagegallery" name="imagegallery" />
 	</reference>
-  </bannerslider_adminhtml_popupgalleryslider_index>
+  </bannerslider_adminhtml_imagegallery_index>
 </layout>

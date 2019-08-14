@@ -1,6 +1,16 @@
-<script src="<?php echo $this->getSkinUrl('bannersliderjs/jquery-1.2.6.noConflict.min.js'); ?>" type="text/javascript" ></script>
-<script type="text/javascript">
+<?php    $gallery_status=$this->getImagegalleryEnabled();   ?>
+<?php    $gallery_Paggingstar=$this->getImagegalleryPaggingstart();   ?>
+<?php    $gallery_Rowitem=$this->getImagegalleryRowitem(); ?>
+ 
 
+
+<?php if($gallery_status==1){ ?>
+
+
+<?php $cssurl =  str_replace('index.php/','',$this->getUrl());?>
+<script src="<?php echo $cssurl.'skin/frontend/base/default/bannerslider/js/jquery-1.2.6.noConflict.min.js'; ?>" type="text/javascript" ></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $cssurl.'skin/frontend/base/default/bannerslider/css/imagegallery.css'; ?>" media="all">
+<script type="text/javascript">
 jQuery.noConflict();
 function applyto(id) {
 var c= '#mks'+id
@@ -18,49 +28,9 @@ jQuery('#mks'+y).show();
 }
 </script>
 
- 
-<style type="text/css">
-.blankdiv{background-color:#000;
-position:fixed;
-z-index: 9001;
-top:0px; height:100%;
-left:0px;
-width:100%; opacity: 0.65;
-filter:alpha(opacity=65);}
-
-#popupform{height: 100%;
-    left: 0;
-    padding: 15px;
-    position: fixed;
-    top: 0;
-    width:97%;
-    z-index: 10001; 
-	}
-	
-#popupform .applyform{position:relative; overflow:auto;
-background-color:#fff;
-width:510px;
-height:500px;  margin:5% auto auto auto;
-z-index: 9002; padding:10px; border:10px solid #7F3814; }
-
-
-#pclose{
-   
   
-    cursor: pointer;
-    height: 25px;
-    margin: 5% auto -6%;
-    position: relative;
-    right: -276px;
-  
-    top: 0;
-    width: 25px;
-    z-index: 9999;}
-</style>
 <?php
 $connection = Mage::getSingleton('core/resource')->getConnection('core_write');
-
-
 $sql = $connection->query("select * from popupgalleryslider");
 $nr = $connection->fetchOne( 'SELECT COUNT(*) AS count FROM popupgalleryslider' );
 //$sql = mysql_query("SELECT * FROM imagegallery");
@@ -73,7 +43,7 @@ if (isset($_GET['pn'])) { // Get pn from URL vars if it is present
     $pn = 1;
 }
 
-  $itemsPerPage = 10;
+$itemsPerPage = $gallery_Paggingstar;
 
 $lastPage = ceil($nr / $itemsPerPage);
 
@@ -140,6 +110,8 @@ if ($lastPage != "1"){
 
 <div style="margin-left:58px; margin-right:58px; padding:6px; background-color:#FFF; border:#999 1px solid;"><?php echo $paginationDisplay; ?></div>
 
+<table>
+<tr>
 <?php 
 $outputList = '';
 $vz=1;
@@ -153,6 +125,7 @@ $country = $row1["image"];
 $media_url =  Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
 $img_src = $media_url.$country; 
 ?>
+<td>
 <div style="margin-left:64px;float:left;">
 <a href="javascript:void(0)"  onclick="applyto('<?php echo $vz; ?>')"><img src="<?php echo $img_src; ?>" height="100" width="100" style="padding:10px;"></a>
 </div>
@@ -163,28 +136,40 @@ $img_src = $media_url.$country;
 <div id="popupform">
 <div class="blankdiv"></div>
 <div id="pclose" onclick="javascript:document.getElementById('<?php echo 'mks'.$vz; ?>').style.display='none'">
-<img src="<?php echo $this->getSkinUrl('bannersliderjs/close.png'); ?>" />
+<img src="<?php echo $cssurl.'skin/frontend/base/default/bannerslider/images/close.png'; ?>" />
 </div>
 <div class="applyform">
 <p id="contactArea">
 
 <center>
-<a href="javascript:void(0)"  onclick="applytoprev('<?php echo $vz; ?>' ,'<?php echo $vz-1; ?>')"><img src="<?php echo $this->getSkinUrl('bannersliderjs/left_1.png'); ?>" /></a>
+<a href="javascript:void(0)"  onclick="applytoprev('<?php echo $vz; ?>' ,'<?php echo $vz-1; ?>')"><img src="<?php echo $cssurl.'skin/frontend/base/default/bannerslider/images/left_1.png'; ?>" /></a>
 <img src="<?php echo $img_src; ?>" height="400" width="400" >
-<a href="javascript:void(0)"  onclick="applytonext('<?php echo $vz; ?>' ,'<?php echo $vz+1; ?>')"><img src="<?php echo $this->getSkinUrl('bannersliderjs/right_1.png'); ?>" /></a>
+<a href="javascript:void(0)"  onclick="applytonext('<?php echo $vz; ?>' ,'<?php echo $vz+1; ?>')"><img src="<?php echo $cssurl.'skin/frontend/base/default/bannerslider/images/right_1.png'; ?>" /></a>
 </center>
 
 </p>
 </div>
 </div>
 </div>
+</td>
+<?php
+if($vz%$gallery_Rowitem==0){
+echo '</tr><tr>';
+}
+ ?>
 <?php $vz++; }  
 ?>
 
- 
+</tr>
+</table>
       
 
 
 
 
+<?php } else { ?>
+
+<h1 style="color:red;">Enable ( MKS IMAGE GALLERY (POP UP) ) Module via Admin = System -> Configuration-> General Setting </h1>
+
+<?php } ?>
 

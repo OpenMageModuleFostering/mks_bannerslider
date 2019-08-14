@@ -2,7 +2,7 @@
 <config>
   <modules>
     <Mks_Bannerslider>
-      <version>1.1.1</version>
+      <version>8.1.1</version>
     </Mks_Bannerslider>
   </modules>
   <frontend>
@@ -42,9 +42,9 @@
 	  <bannerslider_mysql4>
 		<class>Mks_Bannerslider_Model_Mysql4</class>
 		<entities>		  
-			  <popupgalleryslider>
+			  <imagegallery>
 				<table>popupgalleryslider</table>
-			  </popupgalleryslider>
+			  </imagegallery>
         </entities>
 	  </bannerslider_mysql4>
 	</models>
@@ -87,15 +87,15 @@
 		<sort_order>100</sort_order>
 		<children>
 		  <bannersliderbackend module="bannerslider">
-			<title>Banner slider</title>
+			<title>About us</title>
 			<sort_order>0</sort_order>
 			<action>bannerslider/adminhtml_bannersliderbackend</action>
 		  </bannersliderbackend>
-		  <popupgalleryslider module="bannerslider">
-		    <title>Manage Popupgalleryslider</title>
+		  <imagegallery module="bannerslider">
+		    <title>Manage Imagegallery</title>
 			<sort_order>0</sort_order>
-			<action>bannerslider/adminhtml_popupgalleryslider</action>
-		  </popupgalleryslider>
+			<action>bannerslider/adminhtml_imagegallery</action>
+		  </imagegallery>
 		</children>
 	  </bannerslider>
 	</menu>
@@ -111,12 +111,12 @@
 			  <sort_order>1000</sort_order>
 			  <children>
 		  <bannersliderbackend translate="title">
-			<title>Banner slider</title>
+			<title>About us</title>
 		  </bannersliderbackend>
-		  <popupgalleryslider translate="title">
-			<title>Manage Popupgalleryslider</title>
+		  <imagegallery translate="title">
+			<title>Manage Imagegallery</title>
 			<sort_order>0</sort_order>
-		  </popupgalleryslider>
+		  </imagegallery>
 			  </children>
 			</bannerslider>
 		  </children>

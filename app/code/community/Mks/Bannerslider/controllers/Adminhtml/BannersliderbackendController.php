@@ -4,7 +4,7 @@ class Mks_Bannerslider_Adminhtml_BannersliderbackendController extends Mage_Admi
 	public function indexAction()
     {
        $this->loadLayout();
-	   $this->_title($this->__("Banner slider"));
+	   $this->_title($this->__("About us"));
 	   $this->renderLayout();
     }
 }

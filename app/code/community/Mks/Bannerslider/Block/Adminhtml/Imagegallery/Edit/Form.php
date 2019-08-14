@@ -1,5 +1,5 @@
 <?php
-class Mks_Bannerslider_Block_Adminhtml_Popupgalleryslider_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
+class Mks_Bannerslider_Block_Adminhtml_Imagegallery_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
 		protected function _prepareForm()
 		{
