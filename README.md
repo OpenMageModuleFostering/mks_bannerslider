@@ -1,3 +1,5 @@
+
+
 ## Original Package Description
 
 Banner Slider Fully Dynamic (Pop-up image gallery on cms page). always use Banner Slider
