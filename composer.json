@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/Mks_Bannerslider",
+    "name": "OpenMageModuleFostering\/Mks_Bannerslider",
     "type": "magento-module",
     "license": "OSL",
     "homepage": "",
     "description": "Banner Slider Fully Dynamic (Pop-up image gallery on cms page). always use Banner Slider",
     "authors": [
-    {
-        "name": "Mukesh Kumar saini",
-        "email": "in.mukeshsaini@gmail.com"
-    }
-],
+        {
+            "name": "Mukesh Kumar saini",
+            "email": "in.mukeshsaini@gmail.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
